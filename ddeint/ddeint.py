@@ -141,5 +141,6 @@ def ddeint(func, g, tt, fargs=None):
     dde_ = dde(func)
     dde_.set_initial_value(ddeVar(g, tt[0]))
     dde_.set_f_params(fargs if fargs else [])
+    dde.set_integrator('dopri5', atol=1e-5, rtol=0)
     results = [dde_.integrate(dde_.t + dt) for dt in np.diff(tt)]
     return np.array([g(tt[0])] + results)
